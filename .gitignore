@@ -1,3 +1,11 @@
 __pycache__/
 .idea
 .ipynb_checkpoints
+FinRL
+
+git add         README.md
+git add         RL.py
+git add         backtest.ipynb
+git add         env_stocktrading.py
+git add         models.py
+git add         pair-trading.py
