@@ -172,7 +172,7 @@ class TrainGRU(BaseTrainer):
 
         features=len(dl.use_cols)
         print(f"features {features}")
-        self.model=GRUNet(input_size=features*myconfig.SEQUENCE_LENGTH,hidden_size=myconfig.GRU_HIDDEN_SIZE,output_size=1,n_layers=myconfig.GRU_LAYERS)
+        self.model=GRUNet(input_size=features*myconfig.SEQUENCE_LENGTH,hidden_size=myconfig.GRU_HIDDEN_SIZE,output_size=1,n_layers=myconfig.GRU_LAYERS,drop_out=myconfig.GRU_DROPOUT)
         # self.model=GRUNet(input_size=features*myconfig.SEQUENCE_LENGTH,hidden_size=myconfig.GRU_HIDDEN_SIZE,output_size=1,n_layers=myconfig.GRU_LAYERS)
         self.model=self.model.to(device)
         self.loss_fn=nn.MSELoss(reduction='mean')

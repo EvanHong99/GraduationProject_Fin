@@ -119,7 +119,7 @@ class StockPredictor(BasePredictor):
     def load_model(self,root_path=None):
         # path 为根目录
         features=len(self.cfg['USE_COLS'])
-        self.model=GRUNet(input_size=features,hidden_size=self.cfg['GRU_HIDDEN_SIZE'],output_size=1,n_layers=self.cfg['GRU_LAYERS'])
+        self.model=GRUNet(input_size=features,hidden_size=self.cfg['GRU_HIDDEN_SIZE'],output_size=1,n_layers=self.cfg['GRU_LAYERS'],drop_out=0)
         self.model.load_state_dict(torch.load(concat_path(root_path,'GRUmodel.pth'),map_location=torch.device(device)),strict=True)
         self.has_load_model=True
         print("finish loading model")

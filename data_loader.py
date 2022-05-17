@@ -44,9 +44,12 @@ class RNNDataLoader(Dataset):
         self.use_cols=use_cols
         self.use_real=use_real
 
-        self.stockdata = pd.read_csv(file_path[0], header=0,index_col='date').drop(columns=['Unnamed: 0','tic'])
-        self.stockalldata = pd.read_csv(file_path[0].replace('_train','_alldata'), header=0,index_col='date').drop(columns=['Unnamed: 0','tic'])
-        self.stockdata1 = pd.read_csv(file_path[1], header=0,index_col='date').drop(columns=['Unnamed: 0','tic'])
+        
+        dropped=['tic']
+        # dropped=['Unnamed: 0','tic']
+        self.stockdata = pd.read_csv(file_path[0], header=0,index_col='date').drop(columns=dropped)
+        self.stockalldata = pd.read_csv(file_path[0].replace('_train','_alldata'), header=0,index_col='date').drop(columns=dropped)
+        self.stockdata1 = pd.read_csv(file_path[1], header=0,index_col='date').drop(columns=dropped)
         # 这里不能转换成datetime，因为dataloader不允许
         # stockdata.index=pd.to_datetime(stockdata.index)
         self.y_list=self.stockdata1[myconfig.GRU_PRED_TARGET].values.tolist()

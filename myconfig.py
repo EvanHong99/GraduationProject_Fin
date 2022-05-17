@@ -8,21 +8,32 @@
 
 USE_GPU_TRAIN=True
 
-TRAIN_PROP=0.9
-VALID_PROP=0.05
-TEST_PROP=0.05
+TRAIN_PROP=0.8
+VALID_PROP=0.1
+TEST_PROP=0.1
 
 THRESHOLD=0.95
 
 
 # GRU stock price predict train settings
-GRU_ALLDATA_PATH='./data/train/processed_full.csv'
+TRAIN_START_DATE='2014-01-01'
+TRAIN_END_DATE='2019-12-31'
+VALID_START_DATE='2020-01-01'
+VALID_END_DATE='2020-12-31'
+TEST_START_DATE='2021-01-01'
+TEST_END_DATE='2021-12-31'
 INPUT_STOCK='600036'
 TARGET_STOCK='002142'
 GRU_STOCK_CLOSE_ALLDATA_PATH=[f'./data/train/{INPUT_STOCK}_train.csv',f'./data/train/{TARGET_STOCK}_train.csv']
 GRU_TRAIN_PATH=[f'./data/train/{INPUT_STOCK}_train.csv',f'./data/train/{TARGET_STOCK}_train.csv']
 GRU_VALID_PATH=[f'./data/train/{INPUT_STOCK}_valid.csv',f'./data/train/{TARGET_STOCK}_valid.csv']
 GRU_TEST_PATH=[f'./data/train/{INPUT_STOCK}_test.csv',f'./data/train/{TARGET_STOCK}_test.csv']
+GRU_ALLDATA_PATH='./data/train/processed_full.csv'
+def update_path(INPUT_STOCK,TARGET_STOCK):
+    GRU_STOCK_CLOSE_ALLDATA_PATH=[f'./data/train/{INPUT_STOCK}_train.csv',f'./data/train/{TARGET_STOCK}_train.csv']
+    GRU_TRAIN_PATH=[f'./data/train/{INPUT_STOCK}_train.csv',f'./data/train/{TARGET_STOCK}_train.csv']
+    GRU_VALID_PATH=[f'./data/train/{INPUT_STOCK}_valid.csv',f'./data/train/{TARGET_STOCK}_valid.csv']
+    GRU_TEST_PATH=[f'./data/train/{INPUT_STOCK}_test.csv',f'./data/train/{TARGET_STOCK}_test.csv']
 
 USE_REAL=True
 SHUFFLE_TRAIN=False

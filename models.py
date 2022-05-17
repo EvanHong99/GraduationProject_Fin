@@ -23,13 +23,13 @@ class GRUNet(nn.Module):
     """
     预测股票价格
     """
-    def __init__(self, input_size, hidden_size, output_size, n_layers=1,batch_first=False,structure_str=None):
+    def __init__(self, input_size, hidden_size, output_size, n_layers=1,batch_first=False,structure_str=None,drop_out=myconfig.GRU_DROPOUT):
         super(GRUNet, self).__init__()
         if structure_str is None:
             self.hidden_size = hidden_size
             self.n_layers = n_layers
             
-            self.gru = nn.GRU(input_size, hidden_size, n_layers,batch_first=batch_first,dropout =myconfig.GRU_DROPOUT).to(device)  # 输入维度、输出维度、层数、bidirectional用来说明是单向还是双向
+            self.gru = nn.GRU(input_size, hidden_size, n_layers,batch_first=batch_first,dropout =drop_out).to(device)  # 输入维度、输出维度、层数、bidirectional用来说明是单向还是双向
             self.fc = nn.Linear(hidden_size, output_size).to(device)
             # self.dropout = nn.Dropout(p=0.05)
             """   RNN通常意义上是不能使用dropout的，因为RNN的权重存在累乘效应，如果使用dropout的话，会破坏RNN的学习过程。
@@ -47,7 +47,9 @@ class GRUNet(nn.Module):
 
 
     def forward(self, _x):
+        # print("pred"*20,_x)
         x, _ = self.gru(_x)
+        # print("pred"*20,x)
         s, b, h = x.shape
         x = x.reshape(s * b, h)
         # x = self.dropout(x)
